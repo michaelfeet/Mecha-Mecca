@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
-import { useNavigate } from "react-router-dom";
-import { Button, Form, Grid, Header, Image, Segment } from 'semantic-ui-react';
+import { useNavigate, Link } from "react-router-dom";
+import { Button, Form, Grid, Header, Image, Segment, Message } from 'semantic-ui-react';
 
 function isPasswordMatch(passwordOne, passwordConf) {
     return passwordOne === passwordConf;
@@ -25,7 +25,6 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
             [e.target.name]: e.target.value
         });
     }
-
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -63,41 +62,12 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
             });
         }
     }
+
     function handleFileInput(e) {
         console.log(e.target.files, '<<< e.target.files');
         setSelectedFile(e.target.files[0]);
     }
 
-
-    // async function handleSubmit(e) {
-    //     e.preventDefault();
-    //     const formData = new FormData();
-    //     // formData.append('photo', selectedFile);
-    //     // formData.append('email', state.email);
-    //     // formData.append('username', state.username);
-    //     // formData.append('password', state.password);
-    //     // formData.append('passwordConf', state.passwordConf);
-    //     for (let key in state) {
-    //         formData.append(key, state[key]);
-    //     }
-    //     console.log(formData.forEach(e => console.log(e, '<<< Each element in formData')));
-    //     try{
-    //         await userService.signup(formData);
-
-    //     } catch(err) {
-    //         console.log(err.message);
-    //         setError(err.message)
-    //     }
-    //     userService.signup({
-    //         ...state, 
-    //         selectedFile
-    //     });
-    // }
-
-    // function handleFileInput(e) {
-    //     console.log(e.target.files, '<<<E.TARGET.FILES');
-    //     setSelectedFile(e.target.files[0]);
-    // }
     return (
         <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -147,12 +117,13 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
                                 onChange={handleFileInput}
                             />
                         </Form.Field>
-                        <Button type="submit" className="btn" color="red">
-                            Join Now!
-                        </Button>
+                        <Button type="submit" className="btn" color="red">Join Now! </Button>
                     </Segment>
                     {error.message ? <ErrorMessage error={error.message} /> : null}
                 </Form>
+                <Message>
+                    Already have an account? <Link to="/login">Log In</Link>
+                </Message>
             </Grid.Column>
         </Grid>
     );
