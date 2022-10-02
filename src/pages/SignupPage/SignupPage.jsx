@@ -9,7 +9,10 @@ function isPasswordMatch(passwordOne, passwordConf) {
 }
 
 export default function SignUpPage({ handleSignUpOrLogin }) {
-    const [error, setError] = useState('');
+    const [error, setError] = useState({
+        message: '',
+        passwordError: false
+    });
     const [state, setState] = useState({
         username: '',
         email: '',
@@ -36,9 +39,8 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
         }
         if (!selectedFile) {
             return setError({
-                message: 'Please Upload A Profile Picture',
-                passwordError: true
-            })
+                message: 'Please Upload A Profile Image'
+            });
         }
         setError({
             message: '',
@@ -115,6 +117,7 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
                                 name="photo"
                                 placeholder="upload image"
                                 onChange={handleFileInput}
+                                
                             />
                         </Form.Field>
                         <Button type="submit" className="btn" color="red">Join Now! </Button>

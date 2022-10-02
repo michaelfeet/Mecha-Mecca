@@ -53,7 +53,7 @@ async function signup(req, res) {
                         errorMessage: err,
                         err: `${identifyKeyInMongooseValidationError(
                             err.message
-                        )} Already taken!`,
+                        )} Already Taken`,
                     });
             } else {
                 res.status(500).json({
