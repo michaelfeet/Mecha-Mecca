@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Grid, Dimmer, Segment, Image } from 'semantic-ui-react';
+import React from 'react';
+import { Card, Dimmer, Segment, Image } from 'semantic-ui-react';
 import PostCard from '../PostCard/PostCard';
 import Loader from '../Loader/Loader'
 
-export default function PostGallery({ posts, numPhotosCol, isProfile, loading }) {
-    const postCards = posts.map((post) => {
-        return (
-            <PostCard
-                post={post}
-                key={post._id}
-            />
-        );
-    });
+export default function PostGallery({ posts, numPhotosCol, isProfile, loading, loggedUser }) {
 
     return (
         <Card.Group itemsPerRow={numPhotosCol} stackable>
@@ -31,7 +23,7 @@ export default function PostGallery({ posts, numPhotosCol, isProfile, loading })
                         isProfile={isProfile}
                         // removeLike={removeLike}
                         // addLike={addLike}
-                        // loggedUser={loggedUser}
+                        loggedUser={loggedUser}
                     />
                 );
             })}

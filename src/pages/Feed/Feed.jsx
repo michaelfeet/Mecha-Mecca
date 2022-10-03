@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Grid } from 'semantic-ui-react';
 
 import Header from '../../components/Header/Header';
 import AddPost from '../../components/AddPost/AddPost';
 import PostGallery from '../../components/PostGallery/PostGallery';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import Loading from "../../components/Loader/Loader";
+
 import * as postsAPI from '../../utils/postApi';
 
-import { Grid } from 'semantic-ui-react';
-import { useEffect } from 'react';
-
-export default function Feed() {
+export default function Feed({ loggedUser, handleLogout }) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -43,39 +42,10 @@ export default function Feed() {
         getPosts();
     }, [])
 
-    // return (
-    //     <Grid centered>
-    //         <Grid.Row>
-    //             <Grid.Column>
-    //                 <Header />
-    //             </Grid.Column>
-    //         </Grid.Row>
-    //         <Grid.Row>
-    //             <Grid.Column style={{ maxWidth: 450 }}>
-    //                 <AddPost handleAddPost={handleAddPost} />
-    //             </Grid.Column>
-    //         </Grid.Row>
-    //         <Grid.Row>
-    //             <Grid.Column style={{ maxWidth: 450 }}>
-    //                 <PostGallery
-    //                     posts={posts}
-    //                     numPhotosCol={1}
-    //                     isProfile={false}
-    //                     loading={loading}
-    //                     // loading={loading}
-    //                     // addLike={addLike}
-    //                     // removeLike={removeLike}
-    //                     // loggedUser={loggedUser}
-    //                 />
-    //             </Grid.Column>
-    //         </Grid.Row>
-    //     </Grid>
-    // )
     if (error) {
         return (
             <>
-                <Header /> 
-                {/* handleLogout={handleLogout} loggedUser={loggedUser}  */}
+                <Header loggedUser={loggedUser} handleLogout={handleLogout} />
                 <ErrorMessage error={error} />;
             </>
         );
@@ -84,7 +54,7 @@ export default function Feed() {
     if (loading) {
         return (
             <>
-                <Header  />
+                <Header loggedUser={loggedUser} handleLogout={handleLogout} />
                 <Loading />
             </>
         );
@@ -93,7 +63,7 @@ export default function Feed() {
         <Grid centered>
             <Grid.Row>
                 <Grid.Column>
-                    <Header  />
+                    <Header loggedUser={loggedUser} handleLogout={handleLogout} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -110,7 +80,7 @@ export default function Feed() {
                         loading={loading}
                         // addLike={addLike}
                         // removeLike={removeLike}
-                        // loggedUser={loggedUser}
+                        loggedUser={loggedUser}
                     />
                 </Grid.Column>
             </Grid.Row>

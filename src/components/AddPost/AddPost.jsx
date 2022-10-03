@@ -23,7 +23,7 @@ export default function AddPost(props) {
     }
 
     function handleFileInput(e) {
-        console.log(e.target.files, " < - this is e.target.files!");
+        console.log(e.target.files, 'e.target.files');
         setSelectedFile(e.target.files[0]);
     }
 

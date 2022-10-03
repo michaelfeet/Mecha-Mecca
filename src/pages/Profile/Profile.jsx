@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-
 import { useParams } from 'react-router-dom';
-
 import { Grid } from 'semantic-ui-react';
 
+import Header from '../../components/Header/Header';
 import ProfileBio from "../../components/ProfileBio/ProfileBio";
 import PostGallery from "../../components/PostGallery/PostGallery";
-import PageHeader from "../../components/Header/Header";
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Loading from '../../components/Loader/Loader'
 
 import userService from '../../utils/userService';
 
 
-export default function ProfilePage() {
+export default function ProfilePage({ loggedUser }) {
     const [posts, setPosts] = useState([]);
     const [profileUser, setProfileUser] = useState({});
     const [loading, setLoading] = useState(true);
@@ -39,7 +38,7 @@ export default function ProfilePage() {
     if (error) {
         return (
             <>
-                <PageHeader />
+                <Header loggedUser={loggedUser} />
                 <ErrorMessage error={error} />
             </>
         )
@@ -48,8 +47,8 @@ export default function ProfilePage() {
     if (loading) {
         return (
             <>
-                <PageHeader />
-                <h1>Loading</h1>
+                <Header loggedUser={loggedUser} />
+                <Loading />
             </>
         )
     }
@@ -59,7 +58,7 @@ export default function ProfilePage() {
         <Grid>
             <Grid.Row>
                 <Grid.Column>
-                    <PageHeader />
+                    <Header loggedUser={loggedUser} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -73,7 +72,7 @@ export default function ProfilePage() {
                         numPhotosCol={3}
                         isProfile={true}
                         loading={loading}
-                        // loggedUser={loggedUser}
+                        loggedUser={loggedUser}
                     />
                 </Grid.Column>
             </Grid.Row>
