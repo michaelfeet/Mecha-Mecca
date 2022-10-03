@@ -5,6 +5,7 @@ import "./App.css";
 import Feed from '../Feed/Feed'
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
+import ProfilePage from '../Profile/Profile';
 import userService from "../../utils/userService";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/" element={<Feed />} />
                 <Route path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
                 <Route path="/signup" element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
+                <Route path='/:username' element={<ProfilePage />} />
             </Routes>
         );
     }
@@ -43,7 +45,7 @@ function App() {
                 path="/signup"
                 element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
             />
-            <Route path="/*" element={<Navigate to="/login" />} />
+            <Route path="/*" element={<Navigate to="/signup" />} />
         </Routes>
     );
 }

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/post');
 const jwt = require('jsonwebtoken');
 const S3 = require("aws-sdk/clients/s3");
 const s3 = new S3(); // initate the S3 constructor which can talk to aws/s3 our bucket!
@@ -11,12 +12,12 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
     signup,
-    login
+    login,
+    profile
 };
 
 async function signup(req, res) {
     console.log(req.body, " req.body in signup", req.file);
-
     if (!req.file) return res.status(400).json({ error: "Please submit Photo!" });
     // Create the key that we will store in the s3 bucket name
     // pupstagram/ <- will upload everything to the bucket so it appears
@@ -84,6 +85,25 @@ async function login(req, res) {
         return res.status(401).json({ err: 'error message' });
     }
 }
+
+async function profile(req, res) {
+    try {
+        const user = await User.findOne({ username: req.params.username })
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        const posts = await Post.find({ user: user._id }).populate('user').exec();
+        res.status(200).json({
+            data: {
+                user: user,
+                posts: posts
+            }
+        });
+    } catch (err) {
+        console.log(err.message, '<<<PROFILE CONTROLLER')
+        res.status(400).json({ error: 'something is wrong' });
+    }
+}
+
 
 
 /*----- Helper Functions -----*/

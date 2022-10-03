@@ -31,6 +31,21 @@ function signup(user) {
     //.then((token) => token.token);
 }
 
+function getProfile(username) {
+    console.log(username, 'username over here')
+    return fetch(BASE_URL + username, {
+        headers: {
+            Authorization: 'Bearer ' + tokenService.getToken()
+        }
+    }).then(res => {
+        if (res.ok) return res.json();
+        throw new Error('error from getProfile request. check the server terminal.');
+    });
+    // return tokenService.getUserFromToken();
+}
+
+
+
 function getUser() {
     return tokenService.getUserFromToken();
 }
@@ -44,23 +59,22 @@ function login(creds) {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(creds)
-    })
-        .then(res => {
-            // Valid login if we have a status of 2xx (res.ok)
-            if (res.ok) return res.json();
-            return res.json().then(response => {
-                console.log(response)
-                throw new Error(response.err)
-            })
+    }).then(res => {
+        // Valid login if we have a status of 2xx (res.ok)
+        if (res.ok) return res.json();
+        return res.json().then(response => {
+            console.log(response)
+            throw new Error(response.err)
         })
-        .then(({ token }) => tokenService.setToken(token));
+    }).then(({ token }) => tokenService.setToken(token));
 }
 
-
-export default {
+const userService = {
     signup,
     logout,
     login,
-    getUser
+    getUser,
+    getProfile
 };
 
+export default userService
