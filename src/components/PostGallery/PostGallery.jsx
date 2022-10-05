@@ -15,14 +15,12 @@ export default function PostGallery({ posts, numPhotosCol, isProfile, loading, l
                     <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
                 </Segment>
             ) : null}
-            {posts.map((post) => {
+            {posts.reverse().map((post) => {
                 return (
                     <PostCard
                         post={post}
                         key={post._id}
                         isProfile={isProfile}
-                        // removeLike={removeLike}
-                        // addLike={addLike}
                         loggedUser={loggedUser}
                     />
                 );

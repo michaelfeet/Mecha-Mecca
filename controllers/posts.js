@@ -6,7 +6,19 @@ const BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 
 module.exports = {
     create,
-    index
+    index,
+    show: showPost,
+    delete: deletePost
+}
+
+async function showPost(req, res) {
+    try {
+        const post = await Post.findById({ _id: req.params.id }).populate('user').exec();
+        res.status(200).json({ data: post });
+    } catch (err) {
+        console.log(err.message, '<<<show post error');
+        res.status(400).json({error: 'error in show post'})
+    }
 }
 
 function create(req, res) {
@@ -32,9 +44,19 @@ function create(req, res) {
 
 async function index(req, res) {
     try {
-        const posts = await Post.find({}).sort({createdAt:1}).populate('user').exec();
+        const posts = await Post.find({}).sort({ createdAt: 1 }).populate('user').exec();
         res.status(200).json({ data: posts });
     } catch (err) {
         res.status(400).json({ err });
+    }
+}
+
+async function deletePost(req, res) {
+    try{
+        await Post.findByIdAndDelete(req.params.id);
+        res.status(201).json({})
+    } catch(err){
+        console.log(err, "<- Error deleting post in Controller")
+        res.status(400).json({err})
     }
 }

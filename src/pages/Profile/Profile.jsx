@@ -11,7 +11,7 @@ import Loading from '../../components/Loader/Loader'
 import userService from '../../utils/userService';
 
 
-export default function ProfilePage({ loggedUser }) {
+export default function ProfilePage({ loggedUser, handleLogout }) {
     const [posts, setPosts] = useState([]);
     const [profileUser, setProfileUser] = useState({});
     const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ export default function ProfilePage({ loggedUser }) {
     if (error) {
         return (
             <>
-                <Header loggedUser={loggedUser} />
+                <Header loggedUser={loggedUser} handleLogout={handleLogout} />
                 <ErrorMessage error={error} />
             </>
         )
@@ -47,7 +47,7 @@ export default function ProfilePage({ loggedUser }) {
     if (loading) {
         return (
             <>
-                <Header loggedUser={loggedUser} />
+                <Header loggedUser={loggedUser} handleLogout={handleLogout} />
                 <Loading />
             </>
         )
@@ -58,7 +58,7 @@ export default function ProfilePage({ loggedUser }) {
         <Grid>
             <Grid.Row>
                 <Grid.Column>
-                    <Header loggedUser={loggedUser} />
+                    <Header loggedUser={loggedUser} handleLogout={handleLogout} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

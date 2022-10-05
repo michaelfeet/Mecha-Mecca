@@ -32,7 +32,7 @@ function signup(user) {
 }
 
 function getProfile(username) {
-    console.log(username, 'username over here')
+    // console.log(username, 'username over here')
     return fetch(BASE_URL + username, {
         headers: {
             Authorization: 'Bearer ' + tokenService.getToken()
@@ -43,8 +43,6 @@ function getProfile(username) {
     });
     // return tokenService.getUserFromToken();
 }
-
-
 
 function getUser() {
     return tokenService.getUserFromToken();

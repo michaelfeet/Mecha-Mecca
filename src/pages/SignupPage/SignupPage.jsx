@@ -74,7 +74,7 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
         <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
             <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as="h2" color="red" textAlign="center">
-                    <Image src="https://i.imgur.com/2pWgmoI.png" />Join Mecha Mecca
+                    <Image src="https://i.imgur.com/TAtWfEl.png" />Join Mecha Mecca
                 </Header>
                 <Form onSubmit={handleSubmit}>
                     <Segment stacked>

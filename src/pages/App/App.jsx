@@ -6,6 +6,7 @@ import Feed from '../Feed/Feed'
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import ProfilePage from '../Profile/Profile';
+import Show from '../Show/Show'
 import userService from "../../utils/userService";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
                 <Route path="/signup" element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
                 <Route path='/:username' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
+                <Route path='/post/:id' element={<Show loggedUser={user} handleLogout={handleLogout} />} />
             </Routes>
         );
     }

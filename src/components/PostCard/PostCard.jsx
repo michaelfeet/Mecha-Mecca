@@ -1,8 +1,15 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
-import {Link} from 'react-router-dom'
+import { Card, Image, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
+
+import * as postApi from '../../utils/postApi'
 
 export default function PostCard({ post, isProfile, loggedUser }) {
+
+    const handleClick = () => {
+        postApi.deletePost(post._id)
+    }
+
     return (
         <Card key={post._id} raised>
             {isProfile ? (
@@ -25,16 +32,21 @@ export default function PostCard({ post, isProfile, loggedUser }) {
                     </Card.Header>
                 </Card.Content>
             )}
-            <Image src={`${post?.photoUrl}`} wrapped ui={false} />
             <Card.Content>
+                {post.user.username === loggedUser.username
+                    ? <Button onClick={handleClick}>Delete</Button>
+                    : ''
+                }
+            </Card.Content>
+            <Card.Content textAlign='center'>
                 <Card.Description>
                     {post.title}
                 </Card.Description>
             </Card.Content>
-            {/* <Card.Content extra textAlign='right'>
-                    <Icon name={'heart'} size='large' color={'grey'} />
-                    {post.likes.length} Likes
-            </Card.Content> */}
+            <Image src={`${post?.photoUrl}`} wrapped ui={false} />
+            <Link to={`post/${post._id}`}>
+                <Button>Details</Button>
+            </Link>
         </Card>
     )
 }

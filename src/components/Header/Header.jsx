@@ -26,7 +26,8 @@ export default function PageHeader({ loggedUser, handleLogout }) {
             </Header>
             <Header as="h2" floated="left">
                 <Link to="/">
-                    <Image src='https://i.imgur.com/2pWgmoI.png' avatar></Image>
+                    <Image src='https://i.imgur.com/TAtWfEl.png' avatar></Image>
+                    <span>Home</span>
                 </Link>
             </Header>
         </Segment>
