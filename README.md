@@ -2,6 +2,9 @@
 
 An app to showcase your Gundam, Zoid, and other Mecha builds. See what other users are doing and start a conversation.
 
+## Landing Page
+![Imgur](https://i.imgur.com/X4aUv1j.png)
+
 ## Wireframes
 
 <details>
