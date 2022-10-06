@@ -10,25 +10,34 @@ const { v4: uuidv4 } = require('uuid');
 const BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 const SECRET = process.env.SECRET;
 
-module.exports={
+module.exports = {
     create,
-    index
+    getAll
 }
 
 async function create(req, res) {
-    const post = await Post.findById(req.params.id)
-    const comment = await Post.comments.create({
-        username: req.user.username,
-        userId: req.params.user,
-        comment: req.body
-    })
+    console.log(req.body, " <- req.body", req.user);
+    try {
+        const post = await Post.findById(req.body.postId);
+        post.comments.push({
+            comment: req.body.comment,
+            user: req.user,
+        });
+        await post.save();
+        res.status(201).json({ data: "comment added?????" });
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({ err });
+    }
 }
 
-async function index(req, res) {
+
+async function getAll(req, res) {
     try {
-        const posts = await Post.comments.find({}).sort({ createdAt: 1 }).populate('user').exec();
-        res.status(200).json({ data: posts });
+        const post = await Post.findById({ _id: req.params.id })
+        res.status(200).json({ data: post.comments });
     } catch (err) {
-        res.status(400).json({ err });
+        console.log(err.message, '<<<show post error');
+        res.status(400).json({ error: 'error in show post' })
     }
 }

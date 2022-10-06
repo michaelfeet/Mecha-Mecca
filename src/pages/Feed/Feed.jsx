@@ -9,7 +9,7 @@ import Loading from "../../components/Loader/Loader";
 
 import * as postsAPI from '../../utils/postApi';
 
-export default function Feed({ loggedUser, handleLogout, deletePost }) {
+export default function Feed({ loggedUser, handleLogout }) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -92,8 +92,6 @@ export default function Feed({ loggedUser, handleLogout, deletePost }) {
                         isProfile={false}
                         loading={loading}
                         deletePost={deletePost}
-                        // addLike={addLike}
-                        // removeLike={removeLike}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>

@@ -4,11 +4,8 @@ import { Link } from 'react-router-dom'
 
 import * as postApi from '../../utils/postApi'
 
-export default function PostCard({ post, isProfile, loggedUser }) {
+export default function PostCard({ post, isProfile, loggedUser, deletePost }) {
 
-    const handleClick = () => {
-        postApi.deletePost(post._id)
-    }
 
     return (
         <Card key={post._id} raised>
@@ -34,7 +31,7 @@ export default function PostCard({ post, isProfile, loggedUser }) {
             )}
             <Card.Content>
                 {post.user.username === loggedUser.username
-                    ? <Button onClick={handleClick}>Delete</Button>
+                    ? <Button onClick={() => deletePost(post._id)}>Delete</Button>
                     : ''
                 }
             </Card.Content>
@@ -44,7 +41,7 @@ export default function PostCard({ post, isProfile, loggedUser }) {
                 </Card.Description>
             </Card.Content>
             <Image src={`${post?.photoUrl}`} wrapped ui={false} />
-            <Link to={`post/${post._id}`}>
+            <Link to={`/post/${post._id}`}>
                 <Button>Details</Button>
             </Link>
         </Card>

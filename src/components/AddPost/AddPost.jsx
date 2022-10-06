@@ -19,10 +19,13 @@ export default function AddPost(props) {
     }
 
     function handleSubmit(e) {
+        
         e.preventDefault();
         const formData = new FormData();
         formData.append('photo', selectedFile);
         formData.append('title', state.title);
+        console.log(
+            formData.forEach((item) => console.log(item)))
         props.handleAddPost(formData); // formData is the data we want to send to the server!
     }
 

@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Form, Segment, TextArea } from 'semantic-ui-react';
 
-export default function AddComment(props) {
+export default function AddComment({postId, handleAddComment}) {
     const [state, setState] = useState({
         comment: ''
     })
-
+    console.log(postId)
     function handleChange(e) {
         setState({
+            ...state,
             comment: e.target.value
         });
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('comment', state.comment);
-        console.log(formData)
-        props.handleAddComment(formData); // formData is the data we want to send to the server!
+        handleAddComment({
+            comment: state.comment,
+            postId: postId
+        });
     }
 
 
@@ -30,7 +31,7 @@ export default function AddComment(props) {
                     className="form-control"
                     name="comment"
                     value={state.comment}
-                    placeholder="AddComment"
+                    placeholder="Add Comment"
                     onChange={handleChange}
                     required
                 />

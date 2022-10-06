@@ -22,7 +22,7 @@ import { useState, useEffect, useCallBack } from 'react';
 import { Card, Dimmer, Segment, Image } from 'semantic-ui-react';
 
 
-export default function ShowPage({ user }) {
+export default function ShowPage({ user, handleLogout }) {
     const [post, setPost] = useState({});
     const { id } = useParams();
 
@@ -43,15 +43,10 @@ export default function ShowPage({ user }) {
 
     async function handleAddComment(comment) {
         try {
-            // setLoading(true);
             const response = await commentsApi.create(comment);
-            // console.log(response);
-            // setPosts([response.data, ...posts]);
-            // getPosts();
-            // setLoading(false);
+            getOne();
         } catch (err) {
-            // console.log(err.message, 'error creating post');
-            // setError("Error creating post, please try again");
+            console.log(err.message, 'error creating post');
         }
     }
 
@@ -60,8 +55,8 @@ export default function ShowPage({ user }) {
             <h2>test</h2>
             <Image src={post.photoUrl}/>
             <span>{post.title}</span>
-            <AddComment handleAddComment={handleAddComment}/>
-            <CommentList />
+            <AddComment postId={post._id} handleAddComment={handleAddComment}/>
+            <CommentList comments={post.comments}/>
             
         </>
 

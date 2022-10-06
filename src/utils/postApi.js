@@ -21,8 +21,7 @@ export function create(post) {
 export function getAll() {
     return fetch(BASE_URL, {
         headers: {
-            'Authorization': 'Bearer ' + tokenService.getToken() // This grabs thee JWT token out
-            // local storage and send its in the header to the server
+            Authorization: 'Bearer ' + tokenService.getToken()
         }
     }).then((res) => {
         if (res.ok) return res.json();
@@ -51,11 +50,11 @@ export function deletePost(postId) {
     return fetch(BASE_URL + '/' + postId, {
         method: "DELETE",
         headers: {
+            'Content-Type': 'application/json',
             Authorization: "Bearer " + tokenService.getToken(),
         },
     }).then((res) => {
         if (res.ok) return res.json();
-
         return res.json().then(response => {
             console.log(response)
             throw new Error(response.err)

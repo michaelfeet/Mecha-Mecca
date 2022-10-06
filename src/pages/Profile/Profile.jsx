@@ -9,6 +9,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Loading from '../../components/Loader/Loader'
 
 import userService from '../../utils/userService';
+import * as postsAPI from '../../utils/postApi';
 
 
 export default function ProfilePage({ loggedUser, handleLogout }) {
@@ -19,21 +20,33 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
 
     const { username } = useParams();
 
-    useEffect(() => {
-        async function getProfile() {
-            try {
-                const response = await userService.getProfile(username);
-                console.log(response, '<<<user\'s posts');
-                setLoading(false);
-                setProfileUser(response.data.user);
-                setPosts(response.data.posts);
-            } catch (err) {
-                console.log(err.message, 'profile>profilePage()');
-                setError('These are not the droids you\'re looking for. Profile not found.');
-            }
+    async function getProfile() {
+        try {
+            const response = await userService.getProfile(username);
+            console.log(response, '<<<user\'s posts');
+            setLoading(false);
+            setProfileUser(response.data.user);
+            setPosts(response.data.posts);
+        } catch (err) {
+            console.log(err.message, 'profile>profilePage()');
+            setError('These are not the droids you\'re looking for. Profile not found.');
         }
+    }
+
+    useEffect(() => {
         getProfile();
     }, [username]);
+
+    async function deletePost(postId){
+        try{
+            setLoading(true);
+            const response = await postsAPI.deletePost(postId);
+            getProfile();
+            setLoading(false);
+        } catch(err){
+            setError("Error deleting posts, try again.")
+        }
+    }
 
     if (error) {
         return (
@@ -73,6 +86,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
                         isProfile={true}
                         loading={loading}
                         loggedUser={loggedUser}
+                        deletePost={deletePost}
                     />
                 </Grid.Column>
             </Grid.Row>

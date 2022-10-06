@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const commentSchema = mongoose.Schema({
     comment: String,
-    username: String,
-    userId: { type: mongoose.Schema.Types.ObjectId }
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 // A post has many likes, a like belongs to a POST
