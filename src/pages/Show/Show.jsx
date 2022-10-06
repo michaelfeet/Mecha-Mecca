@@ -19,10 +19,11 @@ import * as commentsApi from '../../utils/commentsApi'
 
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useCallBack } from 'react';
-import { Card, Dimmer, Segment, Image } from 'semantic-ui-react';
+import { Grid, Card, Dimmer, Segment, Image, GridColumn } from 'semantic-ui-react';
 
+import './Show.css';
 
-export default function ShowPage({ user, handleLogout }) {
+export default function ShowPage({ loggedUser, handleLogout }) {
     const [post, setPost] = useState({});
     const { id } = useParams();
 
@@ -51,14 +52,41 @@ export default function ShowPage({ user, handleLogout }) {
     }
 
     return (
-        <>
-            <h2>test</h2>
-            <Image src={post.photoUrl}/>
-            <span>{post.title}</span>
-            <AddComment postId={post._id} handleAddComment={handleAddComment}/>
-            <CommentList comments={post.comments}/>
-            
-        </>
+        // <>
+        // <Header handleLogout={handleLogout} loggedUser={loggedUser}/>
+        //     <h2>test</h2>
+        //     <Image src={post.photoUrl}/>
+        //     <span>{post.title}</span>
+        //     <AddComment postId={post._id} handleAddComment={handleAddComment}/>
+        //     <CommentList comments={post.comments}/>
 
+        // </>
+
+
+        <Grid textAlign='center' columns={1} >
+            <Grid.Row>
+                <Grid.Column>
+                    <Header loggedUser={loggedUser} handleLogout={handleLogout} />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row >
+                <Grid.Column>
+                    <h1>{post.title}</h1>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <Image className='image' src={post.photoUrl} />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <AddComment postId={post._id} handleAddComment={handleAddComment} />
+                </Grid.Column>
+                <Grid.Column>
+                    <CommentList className={'list'} comments={post.comments} />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 }

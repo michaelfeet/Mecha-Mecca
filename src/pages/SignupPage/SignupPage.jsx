@@ -4,6 +4,8 @@ import userService from "../../utils/userService";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Grid, Header, Image, Segment, Message } from 'semantic-ui-react';
 
+
+
 function isPasswordMatch(passwordOne, passwordConf) {
     return passwordOne === passwordConf;
 }

@@ -29,21 +29,23 @@ export default function PostCard({ post, isProfile, loggedUser, deletePost }) {
                     </Card.Header>
                 </Card.Content>
             )}
-            <Card.Content>
-                {post.user.username === loggedUser.username
-                    ? <Button onClick={() => deletePost(post._id)}>Delete</Button>
-                    : ''
-                }
-            </Card.Content>
+            
             <Card.Content textAlign='center'>
                 <Card.Description>
                     {post.title}
                 </Card.Description>
             </Card.Content>
             <Image src={`${post?.photoUrl}`} wrapped ui={false} />
+            
+            <Card.Content>
             <Link to={`/post/${post._id}`}>
                 <Button>Details</Button>
             </Link>
+                {post.user.username === loggedUser.username
+                    ? <Button onClick={() => deletePost(post._id)}>Delete</Button>
+                    : ''
+                }
+            </Card.Content>
         </Card>
     )
 }

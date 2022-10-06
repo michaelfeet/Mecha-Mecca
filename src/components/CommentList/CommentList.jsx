@@ -47,13 +47,14 @@ export default function CommentList({ comments }) {
 
     return !comments ? null : (
         <>
-            <div className={'commentlist'}>
-                <ul>{comments.map(c => {
+            <div>
+                <ul className={'list'}>{comments.map(c => {
                     return (
                         <>
-                            <li>
-                                <span>{c.user} </span>
+                            <li className='listItem'>
+                                
                                 <span>{c.comment}</span>
+                                <span> - {c.user}</span>
                             </li>
 
                         </>
