@@ -31,7 +31,6 @@ async function create(req, res) {
     }
 }
 
-
 async function getAll(req, res) {
     try {
         const post = await Post.findById({ _id: req.params.id })
