@@ -25,6 +25,7 @@ An app to showcase your Gundam, Zoid, and other Mecha builds. See what other use
 </details>
 
 ## Getting Started
+- ### [Mecha Mecca on Heroku](https://mecha-mecca.herokuapp.com/)
 - [Trello Board](https://trello.com/b/sFXZy2Dn/mecha-mecca)
 - [Wireframe](https://whimsical.com/mecha-2nkanuBNHUYzynLqp8Wv8f)
 <details>
