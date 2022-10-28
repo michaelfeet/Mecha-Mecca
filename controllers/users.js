@@ -47,7 +47,6 @@ async function signup(req, res) {
         } catch (err) {
             // this is an example pf ho to handle validation errors from mongoose.
             if (err.name === "MongoServerError" && err.code === 11000) {
-                console.log(err.message, "err.message");
                 res
                     .status(423)
                     .json({
@@ -69,11 +68,9 @@ async function signup(req, res) {
 async function login(req, res) {
     try {
         const user = await User.findOne({ email: req.body.email });
-        console.log(user, ' this user in login')
         if (!user) return res.status(401).json({ err: 'bad credentials' });
-        // had to update the password from req.body.pw, to req.body password
+        // had to update the password from req.body.pw, to req.body.password
         user.comparePassword(req.body.password, (err, isMatch) => {
-
             if (isMatch) {
                 const token = createJWT(user);
                 res.json({ token });
@@ -90,7 +87,6 @@ async function profile(req, res) {
     try {
         const user = await User.findOne({ username: req.params.username })
         if (!user) return res.status(404).json({ error: 'User not found' });
-
         const posts = await Post.find({ user: user._id }).populate('user').exec();
         res.status(200).json({
             data: {
@@ -99,7 +95,6 @@ async function profile(req, res) {
             }
         });
     } catch (err) {
-        console.log(err.message, '<<<PROFILE CONTROLLER')
         res.status(400).json({ error: 'something is wrong' });
     }
 }

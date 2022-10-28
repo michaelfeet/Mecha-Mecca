@@ -5,7 +5,6 @@ export default function AddComment({postId, handleAddComment}) {
     const [state, setState] = useState({
         comment: ''
     })
-    console.log(postId)
     function handleChange(e) {
         setState({
             ...state,
@@ -20,8 +19,6 @@ export default function AddComment({postId, handleAddComment}) {
             postId: postId
         });
     }
-
-
 
     return (
         <Segment>

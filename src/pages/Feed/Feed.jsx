@@ -18,12 +18,9 @@ export default function Feed({ loggedUser, handleLogout }) {
         try {
             setLoading(true);
             const response = await postsAPI.create(post);
-            // console.log(response);
-            // setPosts([response.data, ...posts]);
             getPosts();
             setLoading(false);
         } catch (err) {
-            // console.log(err.message, 'error creating post');
             setError("Error creating post, please try again");
         }
     }
@@ -31,11 +28,9 @@ export default function Feed({ loggedUser, handleLogout }) {
     async function getPosts() {
         try {
             const response = await postsAPI.getAll();
-            // console.log(response, '<<<Data');
             setPosts([...response.data]);
             setLoading(false);
         } catch (err) {
-            console.log(err.message, '<<< This is the error');
             setLoading(false);
         }
     }

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Message} from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 
-export default function ErrorMessage(props) {
+export default function ErrorMessage({ error }) {
     return (
         <Message negative>
-            <Message.Header>{props.error}</Message.Header>
+            <Message.Header>{error}</Message.Header>
         </Message>
     )
 }

@@ -4,8 +4,6 @@ import userService from "../../utils/userService";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Grid, Header, Image, Segment, Message } from 'semantic-ui-react';
 
-
-
 function isPasswordMatch(passwordOne, passwordConf) {
     return passwordOne === passwordConf;
 }
@@ -39,27 +37,30 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
                 passwordError: true
             });
         }
+
         if (!selectedFile) {
             return setError({
                 message: 'Please Upload A Profile Image'
             });
         }
+        
         setError({
             message: '',
             passwordError: false
         });
+
         const formData = new FormData();
         formData.append('photo', selectedFile);
+
         for (let key in state) {
             formData.append(key, state[key]);
         }
-        console.log(formData.forEach(e => console.log(e, '<<< Each element in formData')));
+
         try {
             await userService.signup(formData);
             handleSignUpOrLogin();
             navigate('/');
         } catch (err) {
-            console.log(err);
             setError({
                 message: err.message,
                 passwordError: false
@@ -68,7 +69,6 @@ export default function SignUpPage({ handleSignUpOrLogin }) {
     }
 
     function handleFileInput(e) {
-        console.log(e.target.files, '<<< e.target.files');
         setSelectedFile(e.target.files[0]);
     }
 

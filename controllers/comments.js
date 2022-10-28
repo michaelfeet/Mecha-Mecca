@@ -24,9 +24,8 @@ async function create(req, res) {
             user: req.user,
         });
         await post.save();
-        res.status(201).json({ data: "comment added?????" });
+        res.status(201).json({ data: "comment added" });
     } catch (err) {
-        console.log(err);
         res.status(400).json({ err });
     }
 }
@@ -36,7 +35,6 @@ async function getAll(req, res) {
         const post = await Post.findById({ _id: req.params.id })
         res.status(200).json({ data: post.comments });
     } catch (err) {
-        console.log(err.message, '<<<show post error');
         res.status(400).json({ error: 'error in show post' })
     }
 }

@@ -12,7 +12,6 @@ export function create(post) {
     }).then((res) => {
         if (res.ok) return res.json();
         return res.json().then(response => {
-            console.log(response)
             throw new Error('Bad Credentials, Check server terminal for more info.');
         });
     });
@@ -26,7 +25,6 @@ export function getAll() {
     }).then((res) => {
         if (res.ok) return res.json();
         return res.json().then(response => {
-            console.log(response);
             throw new Error(response.err);
         });
     });
@@ -40,7 +38,6 @@ export function showPost(postId) {
     }).then((res) => {
         if (res.ok) return res.json();
         return res.json().then(response => {
-            console.log(response)
             throw new Error(response.err);
         });
     });
@@ -56,7 +53,6 @@ export function deletePost(postId) {
     }).then((res) => {
         if (res.ok) return res.json();
         return res.json().then(response => {
-            console.log(response)
             throw new Error(response.err)
         })
     });

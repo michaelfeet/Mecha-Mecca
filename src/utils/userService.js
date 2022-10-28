@@ -19,7 +19,6 @@ function signup(user) {
 
             //     res.status(400).json({ err: "Something went wrong" }); notice err, and response.err match
             return res.json().then(response => {
-                console.log(response)
                 throw new Error(response.err)
             })
         })

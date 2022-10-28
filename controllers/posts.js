@@ -16,7 +16,6 @@ async function showPost(req, res) {
         const post = await Post.findById({ _id: req.params.id }).populate('user').exec();
         res.status(200).json({ data: post });
     } catch (err) {
-        console.log(err.message, '<<<show post error');
         res.status(400).json({error: 'error in show post'})
     }
 }
@@ -56,7 +55,6 @@ async function deletePost(req, res) {
         await Post.findByIdAndDelete(req.params.id);
         res.status(201).json({})
     } catch(err){
-        console.log(err, "<- Error deleting post in Controller")
         res.status(400).json({err})
     }
 }

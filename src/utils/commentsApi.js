@@ -3,7 +3,6 @@ import tokenService from "./tokenService";
 const BASE_URL = "/api/comments";
 
 export function create(comment) {
-    console.log(comment, 'commentdata')
     return fetch(BASE_URL, {
         method: "POST",
         body: JSON.stringify(comment),
